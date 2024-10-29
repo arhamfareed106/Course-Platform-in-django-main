@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* Dark theme styling */
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    h2 {
+        color: #bb86fc;
+        margin-bottom: 20px;
+    }
+
+    /* Course card styling */
+    .course-card {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        transition: transform 0.3s, opacity 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s forwards;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .course-card:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-success, .btn-danger {
+        color: #121212;
+    }
+
+    .btn-success:hover {
+        background-color: #bb86fc;
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: #ff5555;
+        border: none;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2>Available Courses</h2>
+
+    {% for course in courses %}
+    <div class="card course-card">
+        <div class="row align-items-center">
+            <div class="col-md-10">
+                <h5>{{ course.title }}</h5>
+                <p class="mb-1">{{ course.price }} USD</p>
+            </div>
+            <div class="col-md-2 text-md-end text-center mt-2 mt-md-0">
+                {% if course.is_unlocked %}
+                    <a href="{% url 'course_detail' course.id %}" class="btn btn-success">View Course</a>
+                {% else %}
+                    <a href="{% url 'payment:create_checkout_session' course.id %}" class="btn btn-danger">Buy Course</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>No courses available at the moment.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

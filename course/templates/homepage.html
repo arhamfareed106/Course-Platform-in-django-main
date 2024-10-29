@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* Dark theme styling */
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    h1, h2 {
+        color: #bb86fc;
+    }
+
+    /* Card styling for courses */
+    .course-card {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: transform 0.3s, opacity 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s forwards;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .course-card:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-course {
+        background-color: #bb86fc;
+        color: #121212;
+    }
+
+    .btn-course:hover {
+        background-color: #ffffff;
+        color: #121212;
+    }
+</style>
+
+<div class="container mt-4">
+    <h1>Welcome to Our Course Platform</h1>
+    
+    {% if featured_courses %}
+        <h2 class="mt-4">Featured Courses</h2>
+        <div class="row">
+            {% for course in featured_courses %}
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <h3>{{ course.title }}</h3>
+                        <p>{{ course.content|truncatewords:20 }}</p>
+                        <a href="{% url 'course_detail' course.id %}" class="btn btn-course">Learn More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="mt-4">No featured courses available right now.</p>
+    {% endif %}
+    
+    <div class="text-center mt-4">
+        <a href="{% url 'course_list' %}" class="btn btn-course">View All Courses</a>
+    </div>
+</div>
+{% endblock %}

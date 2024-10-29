@@ -1,0 +1,68 @@
+<!-- templates/about_us.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Fade-in animation for the About Us content */
+    .about-us-section {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+        animation-delay: 0.2s;
+    }
+
+    /* Fade-in Keyframes */
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover effect for h2 and p elements */
+    .about-us-section h2:hover {
+        color: #bb86fc;
+        transform: scale(1.05);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .about-us-section p:hover {
+        color: #bb86fc;
+        transition: color 0.3s ease;
+    }
+
+    /* Hover effect for list items */
+    .about-us-section ul li:hover {
+        color: #ffffff;
+        background-color: #bb86fc;
+        padding-left: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+    }
+
+    /* Contact Us link hover effect */
+    .about-us-section a:hover {
+        text-decoration: underline;
+        color: #bb86fc;
+        transition: color 0.3s ease;
+    }
+</style>
+
+<div class="container mt-5 about-us-section">
+    <h1>About Us</h1>
+    <p>Welcome to our course platform! We are dedicated to providing quality learning experiences for everyone. Our platform offers a wide range of courses designed by industry experts to help you gain new skills and advance your career.</p>
+    
+    <h2>Our Mission</h2>
+    <p>Our mission is to make high-quality education accessible to all, regardless of location or background. We believe that learning should be a lifelong journey, and our courses are crafted to cater to learners at every stage of their educational path.</p>
+    
+    <h2>What We Offer</h2>
+    <ul>
+        <li>Expert-led courses across various disciplines</li>
+        <li>Interactive learning experiences</li>
+        <li>Flexible learning schedules</li>
+        <li>Certification upon course completion</li>
+    </ul>
+    
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need support, feel free to contact us</a>.</p>
+</div>
+{% endblock %}

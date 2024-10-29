@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course SaaS</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Dark Theme */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif; /* Improved font */
+            min-height: 100vh; /* Ensure body takes full height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #1e1e1e;
+            transition: background-color 0.3s ease; /* Smooth navbar background transition */
+        }
+
+        .navbar-brand {
+            color: #bb86fc;
+            position: relative; /* For positioning the hover effect */
+            overflow: hidden; /* Clipping for the hover effect */
+        }
+
+        .navbar-brand:hover {
+            color: #ffffff; /* Change text color on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            height: 2px; /* Thickness of the line */
+            width: 100%;
+            background: #bb86fc; /* Line color */
+            transform: translateX(-50%) scaleX(0); /* Start hidden */
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+        .navbar-brand:hover::after {
+            transform: translateX(-50%) scaleX(1); /* Show line on hover */
+        }
+
+        .nav-link {
+            color: #bb86fc;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+
+        /* Container Animation */
+        .container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease-out forwards;
+            flex: 1; /* Allow container to expand */
+        }
+
+        /* Keyframes for Fade-In */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Button Styles */
+        .btn-link {
+            color: #bb86fc; /* Link color */
+            background-color: #1e1e1e; /* Dark background */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 15px; /* Padding for better spacing */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            margin-right: 10px; /* Space between buttons */
+            position: relative; /* Position for pseudo-element */
+            overflow: hidden; /* Ensure pseudo-element is clipped */
+        }
+
+        .btn-link:hover {
+            background-color: #bb86fc; /* Change background color on hover */
+            color: #121212; /* Change text color on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Button Hover Animation */
+        .btn-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1); /* Light overlay */
+            border-radius: 50%; /* Circular shape */
+            transform: translate(-50%, -50%) scale(0); /* Start invisible */
+            transition: transform 0.5s ease; /* Smooth transition */
+        }
+
+        .btn-link:hover::after {
+            transform: translate(-50%, -50%) scale(1); /* Scale on hover */
+        }
+
+        /* Custom Navbar Hover Effect */
+        .navbar-nav .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Background on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Navbar Positioning */
+        .navbar-nav {
+            margin-left: auto; /* Aligns nav items to the right */
+        }
+
+        /* Transition for the navbar */
+        .navbar.scrolled {
+            background-color: #1c1c1c; /* Darken navbar on scroll */
+        }
+
+        /* Footer Style */
+        footer {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 10px 0;
+            position: relative; /* Allow positioning */
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        /* Footer Text Animation */
+        .footer-text {
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-block; /* Allows for transform effect */
+        }
+
+        .footer-text:hover {
+            transform: scale(1.1); /* Scale effect on hover */
+            color: #bb86fc; /* Change color on hover */
+        }
+
+        /* Footer Text Animation */
+        .footer-text {
+            opacity: 0; /* Start invisible */
+            animation: fadeInFooter 0.5s forwards; /* Animation effect */
+            animation-delay: 0.5s; /* Delay for footer text */
+        }
+
+        @keyframes fadeInFooter {
+            to {
+                opacity: 1; /* End fully visible */
+            }
+        }
+
+        /* Sign In and Register Button Styles */
+        .btn-primary, .btn-secondary {
+            color: #bb86fc;
+            background-color: #1e1e1e; /* Dark background */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 15px; /* Padding for better spacing */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            margin: 5px; /* Space between buttons */
+            position: relative; /* Position for pseudo-element */
+            overflow: hidden; /* Ensure pseudo-element is clipped */
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: #bb86fc; /* Change background color on hover */
+            color: #121212; /* Change text color on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Button Hover Animation for Sign In and Register */
+        .btn-primary::after, .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1); /* Light overlay */
+            border-radius: 50%; /* Circular shape */
+            transform: translate(-50%, -50%) scale(0); /* Start invisible */
+            transition: transform 0.5s ease; /* Smooth transition */
+        }
+
+        .btn-primary:hover::after, .btn-secondary:hover::after {
+            transform: translate(-50%, -50%) scale(1); /* Scale on hover */
+        }
+
+        /* About Us Button Styles */
+        .btn-about {
+            background-color: #bb86fc; /* Button color */
+            color: #121212; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 15px 25px; /* Padding for better spacing */
+            font-size: 16px; /* Font size */
+            margin-top: 20px; /* Margin above button */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+        }
+
+        .btn-about:hover {
+            background-color: #9a67d2; /* Darken on hover */
+            color: #ffffff; /* Change text color on hover */
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+
+        .btn-about:focus {
+            outline: none; /* Remove outline on focus */
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'homepage' %}">Course Platform</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link btn-link p-4" href="{% url 'about_us' %}">About Us</a> <!-- New About Us link -->
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="btn-link" href="{% url 'user_info' %}">User Info</a> <!-- Updated User Info button -->
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-link">
+                                Logout
+                            </button> <!-- Updated Logout button -->
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{% url 'login' %}">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-4">
+        {% block content %}
+        <div class="text-center">
+            <h1>Welcome to Our Course Platform</h1>
+            <p>Join us in exploring a wide range of courses tailored for your learning journey!</p>
+            <a href="{% url 'about_us' %}" class="btn-about">Learn More About Us</a> <!-- About Us button -->
+        </div>
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p class="footer-text">Developed by Arham Fareed</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="animated-header">User Information</h2>
+
+<div class="user-info">
+    <p class="fade-in"><strong>Username:</strong> <span class="highlight">{{ user.username }}</span></p>
+    <p class="fade-in"><strong>Email:</strong> <span class="highlight">{{ user.email }}</span></p>
+    <p class="fade-in"><strong>First Name:</strong> <span class="highlight">{{ user.first_name }}</span></p>
+    <p class="fade-in"><strong>Last Name:</strong> <span class="highlight">{{ user.last_name }}</span></p>
+</div>
+
+<a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
+
+<style>
+    /* Fade-in animation for paragraphs */
+    .fade-in {
+        opacity: 0; /* Start invisible */
+        animation: fadeIn 0.8s forwards; /* Animation effect */
+    }
+
+    /* Apply a staggered effect to each paragraph */
+    .fade-in:nth-child(1) { animation-delay: 0.2s; }
+    .fade-in:nth-child(2) { animation-delay: 0.4s; }
+    .fade-in:nth-child(3) { animation-delay: 0.6s; }
+    .fade-in:nth-child(4) { animation-delay: 0.8s; }
+
+    /* Keyframes for the fade-in effect */
+    @keyframes fadeIn {
+        to {
+            opacity: 1; /* End fully visible */
+        }
+    }
+</style>
+{% endblock %}
